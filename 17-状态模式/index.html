@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>状态模式</h1>
+  <div><strong>状态模式</strong> State Pattern）允许一个对象在其 <strong>内部状态改变时改变它的行为</strong> ，对象看起来似乎修改了它的类，类的行为随着它的状态改变而改变。</div>
+  <div>当程序需要根据不同的外部情况来做出不同操作时，最直接的方法就是使用 switch-case 或 if-else 语句将这些可能发生的情况全部兼顾到，但是这种做法应付复杂一点的状态判断时就有点力不从心，开发者得找到合适的位置添加或修改代码，这个过程很容易出错，这时引入状态模式可以某种程度上缓解这个问题。</div>
+
+  <h4>状态模式与访问者模式</h4>
+  <ul>
+    <li>在状态模式（State Pattern）中，类的行为是基于它的状态改变的。这种类型的设计模式属于行为型模式。</li>
+    <li>在状态模式中，我们创建表示各种状态的对象和一个行为随着状态对象改变而改变的 context 对象。</li>
+    <li>在访问者模式（Visitor Pattern）中，我们使用了一个访问者类，它改变了元素类的执行算法。通过这种方式，元素的执行算法可以随着访问者改变而改变。</li>
+  </ul>
+  <script src="./index.js"></script>
+  <!-- <script src="./index2.js"></script> -->
+</body>
+</html>

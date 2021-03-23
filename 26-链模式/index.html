@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>链模式</h1>
+  <div>通常情况下，通过对构造函数使用 new 会返回一个绑定到 this 上的新实例，所以我们可以在 new 出来的对象上直接用 . 访问其属性和方法。如果在普通函数中也返回当前实例，那么我们就可以使用 . 在单行代码中一次性连续调用多个方法，就好像它们被链接在一起一样，这就是 <strong>链式调用</strong> ，又称 <strong>链模式</strong> 。</div>
+  <br />
+  <div>日常使用的 jQuery、Promise 等也使用了链模式</div>
+  <h4>特点</h4>
+  <ul>
+    链模式和一般的函数调用的区别在于：链模式一般会在调用完方法之后返回一个对象，有时则直接返回 this ，因此又可以继续调用这个对象上的其他方法，这样可以对同一个对象连续执行多个方法。
+  </ul>
+  <h4>案例</h4>
+  <pre>
+    <code>
+      /* 四边形 */
+      var rectangle = {
+          length: null,  // 长
+          width: null,   // 宽
+          color: null,   // 颜色
+          
+          // 这个函数是最后一步了，所以不用返回this
+          getSize: function() {
+              console.log(`length: ${ this.length }, width: ${ this.width }, color: ${ this.color }`)
+          },
+          
+          /* 设置长度 */
+          setLength: function(length) {
+              this.length = length
+              return this // 返回this
+          },
+          
+          /* 设置宽度 */
+          setWidth: function(width) {
+              this.width = width
+              return this  // 返回 this
+          },
+          
+          /* 设置颜色 */
+          setColor: function(color) {
+              this.color = color
+              return this // 返回this
+          }
+      }
+      var rect = rectangle
+        .setLength('100px')
+        .setWidth('80px')
+        .setColor('blue')
+        .getSize()
+      // 输出：length: 100px, width: 80px, color: blue
+    </code>
+  </pre>
+  <h4>链模式不一定必须返回 this</h4>
+  <ul>
+    不一定在方法中 return this，也可以返回 <strong>其他对象</strong> ，这样后面的方法可以对这个新对象进行其他操作。比如在 Promise 的实现中，每次 then 方法返回的就不是 this，而是一个新的 Promise，只不过其外观一样，所以我们可以不断 then 下去。后面的每一个 then 都不是从最初的 Promise 实例点出来的，而是从前一个 then 返回的新的 Promise 实例点出来的。
+  </ul>
+  <pre>
+    <code>
+      const prom1 = new Promise((resolve, reject) => {
+          setTimeout(() => {
+              console.log('Promise 1 resolved')
+              resolve()
+          }, 500)
+      })
+      const prom2 = prom1.then(() => {
+          console.log('Then method')
+      })
+      console.log(prom1 === prom2)
+      // 输出： false
+    </code>
+  </pre>
+  <ul>
+    事实上，某些原生的方法就可以使用链模式，以数组操作为例，比如我们想查看一个数组中奇数的平方和：
+    <pre>
+      <code>
+        [1, 2, 3, 4, 5, 6]
+        .filter(num => num % 2)
+        .map(num => num * num)
+        .reduce((pre, curr) => pre + curr, 0)
+      // 输出 35
+      </code>
+    </pre>
+    <div>那么这里为什么可以使用链模式呢，是因为 filter、map、reduce 这些数组方法返回的仍然是数组，因此可以继续在后面调用数组的方法。</div>
+    <div>注意，并不是所有数组方法都返回数组，比如 push 的时候返回的是新数组的 length 属性。</div>
+  </ul>
+</body>
+</html>

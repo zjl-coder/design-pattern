@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>策略模式</h1>
+  <div><strong>策略模式</strong> （Strategy Pattern）又称 <strong>政策模式</strong>其定义一系列的算法，把它们一个个封装起来，并且使它们可以互相替换。封装的策略算法一般是独立的，策略模式根据输入来调整采用哪个算法。关键是策略的 <strong>实现和使用分离</strong> 。</div>
+  <br />
+  <div><a href="https://www.yuque.com/wubinhp/uxiv5i/gbhta4">策略模式·语雀</a></div>
+  <br />
+  <h4>生活实例</h4>
+  <ul>
+    <li>电商网站希望举办一个活动: 不同商品打折促销不同</li>
+    <li>
+      多功能的螺丝刀套装，螺丝刀把只需要一个，碰到不同规格的螺丝只要换螺丝刀头就行了
+      <br/>
+      <img src="../public/策略模式.jpeg" alt="" srcset="">
+    </li>
+  </ul>
+  <h4>概念</h4>
+  <ul>
+    <li>Context ：封装上下文，根据需要调用需要的策略，屏蔽外界对策略的直接调用，只对外提供一个接口，根据需要调用对应的策略；</li>
+    <li>Strategy ：策略，含有具体的算法，其方法的外观相同，因此可以互相代替；</li>
+    <li>StrategyMap ：所有策略的合集，供封装上下文调用；</li>
+  </ul>
+  <h4>实战中的策略模式</h4>
+  <ul>
+    <li>表格 formatter ------  Vue + ElementUI</li>
+    <li>表单验证</li>
+  </ul>
+  <h4>适用场景</h4>
+  <ul>
+    <li>多个算法 <strong>只在行为上稍有不同</strong> 的场景，这时可以使用策略模式来动态选择算法；</li>
+    <li>算法 <strong>需要自由切换</strong> 的场景；</li>
+    <li>有时 <strong>需要多重条件判断</strong> ，那么可以使用策略模式来规避多重条件判断的情况；</li>
+  </ul>
+  <h4>策略模式和模板方法模式</h4>
+  <ul>
+    策略模式和模板方法模式的作用比较类似，但是结构和实现方式有点不一样。
+    <li><strong>策略模式</strong> 让我们在程序运行的时候动态地指定要使用的算法；</li>
+    <li><strong>模板方法模式</strong> 是在子类定义的时候就已经确定了使用的算法；</li>
+  </ul>
+  <script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>适配器模式</h1>
+    <div>
+      <strong>适配器模式</strong> （Adapter Pattern）又称
+      <strong>包装器模式</strong>
+      ，将一个类（对象）的接口（方法、属性）转化为用户需要的另一个接口，解决类（对象）之间接口不兼容的问题。
+    </div>
+    <div>
+      主要功能是进行 <strong>转换匹配</strong> ，目的是复用已有的功能，而不是来实现新的接口。
+    </div>
+    <h4>实例</h4>
+    <ul>
+      <li>插座转接头</li>
+      <li>Vue计算属性</li>
+      <li>Axios 对 XMLHttpRequest 的封装</li>
+    </ul>
+
+    <h4>使用场景</h4>
+    <ul>
+      <li>当你想用已有对象的功能，却想修改它的接口时，一般可以考虑一下是不是可以应用适配器模式。</li>
+      <li>如果你想要使用一个已经存在的对象，但是它的接口不满足需求，那么可以使用适配器模式，把已有的实现转换成你需要的接口；</li>
+      <li>如果你想创建一个可以复用的对象，而且确定需要和一些不兼容的对象一起工作，这种情况可以使用适配器模式，然后需要什么就适配什么；</li>
+    </ul>
+
+    <h4>目的：复用已存在的接口或者对象</h4>
+
+    <pre>
+      <code>
+        <xmp>
+          // Vue计算属性
+          <template>
+            <div id="example">
+                <p>Original message: "{{ message }}"</p>  <!-- Hello -->
+                <p>Computed reversed message: "{{ reversedMessage }}"</p>  <!-- olleH -->
+            </div>
+          </template>
+          <script type='text/javascript'>
+            export default {
+                name: 'demo',
+                data() {
+                    return {
+                        message: 'Hello'
+                    }
+                },
+                computed: {
+                    reversedMessage: function() {
+                        return this.message.split('').reverse().join('')
+                    }
+                }
+            }
+          </script>
+        </xmp>
+      </code>
+    </pre>
+    <div>
+      旧有 data
+      中的数据不满足当前的要求，通过计算属性的规则来适配成我们需要的格式，对原有数据并没有改变，只改变了原有数据的表现形式。
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>

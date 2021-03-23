@@ -1,0 +1,37 @@
+<body>
+  <div id="app">
+    <p>{{name}}</p>
+    <p k-text="name"></p>
+    <p>{{age}}</p>
+    <p> {{doubleAge}} </p>
+    <input type="text" k-model="name">
+    <button @click="changeName">呵呵</button>
+    <div k-html="html"></div>
+  </div>
+  <script src='./compile2.js'></script>
+  <script src="./kvue2.js"></script>
+  <script>
+    console.log(1);
+    const app = new KVue({
+      el: '#app',
+      data: {
+        name: "I am test.",
+        age: 12,
+        html: '<button>这是⼀一个按钮</button>'
+      },
+      created() {
+        console.log('开始啦')
+        setTimeout(() => {
+          this.name = '我是测试'
+          console.log('结束啦')
+        }, 1500)
+      },
+      methods: {
+        changeName() {
+          this.name = '哈喽，开课吧'
+          this.age = 1
+        }
+      }
+    })
+  </script>
+</body>

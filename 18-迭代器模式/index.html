@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>迭代器模式</h1>
+  <div><strong>迭代器模式</strong> （Iterator Pattern）用于顺序地访问聚合对象内部的元素，又无需知道对象内部结构。使用了迭代器之后，使用者不需要关心对象的内部构造，就可以按序访问其中的每个元素。</div>
+  <div>javascript 已提供了很多迭代器，不需要自己实现了，比如 Array 上的 filter、forEach、reduce、flat 等，还有 Map、Set、String 等数据结构，也提供了原生的迭代器支持，给我们的开发提供了很多便利，</div>
+
+  <h4>迭代器的简单实现</h4>
+  <pre>
+    <code>
+      var forEach = function(arr, cb) {
+          for (var i = 0; i < arr.length; i++) {
+              cb.call(arr[i], arr[i], i, arr)
+          }
+      }
+    </code>
+  </pre>
+  <h4>ES6 中的迭代器</h4>
+  <ul>
+    ES6 规定，默认的迭代器部署在对应数据结构的 Symbol.iterator 属性上，如果一个数据结构具有 Symbol.iterator 属性，就被视为可遍历的，就可以用 for...of 循环遍历它的成员。也就是说，for...of循环内部调用的是数据结构的Symbol.iterator 方法。
+for-of 循环可以使用的范围包括 Array、Set、Map 结构、上文提到的类数组结构、Generator 对象，以及字符串。
+    <div>
+      我们可以给一个对象设置一个迭代器，让一个对象也可以使用 for-of 循环：
+    </div>
+    <pre>
+      <code>
+        var bar = {
+            a: 1,
+            [Symbol.iterator]: function() {
+                var valArr = [
+                    { value: 'hello', done: false },
+                    { value: 'world', done: false },
+                    { value: '!', done: false },
+                    { value: undefined, done: true }
+                ]
+                return {
+                    next: function() {
+                        return valArr.shift()
+                    }
+                }
+            }
+        }
+        for (var key of bar) {
+            console.log(key)
+        }
+        // 输出： hello
+        // 输出： world
+        // 输出： !
+      </code>
+    </pre>
+  </ul>
+</body>
+</html>

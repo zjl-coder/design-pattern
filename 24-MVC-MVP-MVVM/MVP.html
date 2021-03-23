@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>MVP 模式</h1>
+    <h4>MVC --> MVP 演变</h4>
+    <ul>
+      <li>
+        MVC 模式的 View 层和 Model 层存在耦合。在MVC模式中，View 需要初始化 Model, 使用 Model
+        获取数据来更新自己， 并且订阅 Model 数据。
+      </li>
+      <li>
+        为了将 View 层与 Model 层解耦，View 的数据来源将从 Model 转移到 Controller
+        中，从而形成一次架构升级，升级后的模式称为 MVP 模式，即 Controller 变成名称为
+        Presenter（管理层）， View 依然专注管理者 HTML 只是数据来源改为从 Presenter 处获取。Model
+        依然专注管理数据层，但 View 不再订阅 Model 的数据变化，所以不再需要通知 View，改而 Presenter
+        订阅 Model 数据变化，Model 通知 Presenter ， Prensenter 接收到数据之后通知 View。
+      </li>
+      <li>使得对 View 层的修改不会影响到 Model 层，而对 Model 层的数据改动也不会影响到 View 层。</li>
+      <li>典型流程是 View 层 <strong>触发的事件</strong> 传递到 Presenter 层中处理(处理事件，写click 回调函数)，Presenter 层去操作 Model 层，并且将数据返回给 View 层，这个过程中，<strong>View 层和 Model 层没有直接联系</strong> 。而 View 层不部署业务逻辑，除了展示数据和触发事件之外，其它时间都在等着 Presenter 层来更新自己，被称为 <strong>「被动视图」</strong> 。</li>
+    </ul>
+    <h4>特点</h4>
+    <ul>
+      <li><strong>Model 模型层：</strong>只负责存储数据，与 View 呈现无关，也与 UI 处理逻辑无关，发生更新也不用主动通知 View；</li>
+      <li><strong>View 视图层：</strong>人机交互接口，一般为展示给用户的界面；</li>
+      <li><strong>Presenter 管理层 ：</strong>负责连接 Model 层和 View 层，处理 View 层的事件，负责获取数据并将获取的数据经过处理后更新 View；</li>
+    </ul>
+    <img src="../public/mvp.jpeg" alt="" srcset="" />
+    <h4>修改 MVC</h4>
+    <ul>
+      <li>将 model 对象从 View 中移除。</li>
+      <li>View 只跟  Controller 交互</li>
+      <li>Controller 负责跟 Model 交互</li>
+      <li>View 和 Model 没有任何直接交互</li>
+      <li>View 不再订阅 Model 的发布</li>
+      <li>Model 无需再为自己的行为注册发布者</li>
+      <li>View 的数据来自 Controller，并且 View 的更新动作 在 Controller 内触发</li>
+      <li>发布者 只有 View 一个</li>
+    </ul>
+    <h4>MVC 实战案例</h4>
+  
+  <select id="list" size="10" style="width: 10rem"></select><br/>
+  <button id="plusBtn">  +  </button>
+  <button id="minusBtn">  -  </button>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+  <script src="./MVP.js"></script>
+  <script>
+    const list = $('#list');
+    const addButton = $('#plusBtn');
+
+    // 初始化模块，连接数据库['PHP', 'JS']（这个数据模拟数据库数据）
+    const model = new Model(['PHP', 'JS']);
+    // 初始化视图
+    const view = new View({ list, addButton});
+    // 初始化控制器
+    new Controller(model, view);
+  </script>
+  </body>
+</html>

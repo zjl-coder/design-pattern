@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>命令模式</h1>
+  <div><strong>命令模式</strong>（Command Pattern）又称 <strong>事务模式</strong>，将请求封装成对象，将命令的 <strong>发送者</strong> 和 <strong>接受者</strong> 解耦。本质上是对 <strong>方法调用的封装</strong> 。</div>
+  <ul>
+    <li>命令（Command）模式在实际项目开发中真的比较少使用，毕竟我们都习惯了对类的封装自然的包含了属性与行为。（就是将属性和行为都封装在一个类里面。）</li>
+    <li>命令模式却是把行为从类中分离，独立封装成类。(不一定是全部行为都分离，可能只是分离部分行为，遗留一部分用作被分离出来的函数所调用。)</li>
+    <li>为什么这样子做呢，因为这样我们强调了行为，</li>
+    <li>使得行为的扩展与继承更加灵活。</li>
+    <li>对于基于 <strong>不同模板</strong> 生成的对象却又具有 <strong>相同行为</strong> 的场景来说，命令模式可以大大提高组合的灵活性。</li>
+  </ul>
+  <h4>生活实例·只能家居</h4>
+  <ul>
+    <li>有一个遥控，可以控制 大厅的灯，卧室的灯，热水器，空调，电视等电器的开关。</li>
+    <li>但是每次按按钮，我们并不知道到底有没有起到控制作用，我们也不关心中间是怎么执行的，反正就是按下关灯按钮。最后就对应的灯关了</li>
+  </ul>
+
+  <div>我们原来分装电灯类是这样子的</div>
+  <pre>
+    <code>
+      // 电灯类
+      class Light{
+        constructor(name){
+          this.name = name;
+        }
+        on(){
+          console.log('打开',this.name)
+        }
+        off(){
+          console.log('关掉',this.name)
+        }
+        // 只有通过调用这个函数才能真正起到关灯的作用，因为这个是对灯的指令的入口
+        execute(command){
+          console.log("各种处理，然后开关灯");
+          if(command === 'on'){
+            this.on();
+          }
+          else if(command === 'off'){
+            this.off();
+          }
+        }
+      }
+
+      const light = new Light('卧室灯');
+      light.on(); // 无效，无法真正开灯
+      light.execute('on'); // 开灯 有效
+    </code>
+  </pre>
+  <div>将灯的控制行为抽离出来，独立成了类，形成发送命令类</div>
+  <pre>
+    <code>
+      // 电灯类
+      class Light{
+        constructor(name){
+          this.name = name;
+        }
+        on(){
+          console.log('打开',this.name)
+        }
+        off(){
+          console.log('关掉',this.name)
+        }
+      }
+
+      // 电灯指令类
+      class LightCommand {
+        constructor(name){
+          super();
+          this.name = name;
+          // 将控制电灯的指令抽离出来独立成类，为了这个指令能准确控制电灯，需要在内部初始化电灯类
+          this.light = new Light(name);
+        }
+
+        // 这个本来是在电灯类里面的，被独立出来了
+        execute(command){
+          if(command === 'on'){
+            this.light.on();
+          }
+          else if(command === 'off'){
+            this.light.off();
+          }
+        }
+      }
+
+      // 通过调用电灯指令类就可以去控制电灯
+      const lightCommand = new LightCommand('卧室灯');
+      lightCommand.execute('on'); // 开灯
+      // 此时，使用者并不知道灯的打开方式是怎样的，也就不会去调用 light 的 on方法了，而是交给指令去操作，使用者只需要发送指令。
+    </code>
+  </pre>
+
+  <div>当这指令抽离得多了以后，可以自由组合成一个遥控器，形成智能家居的遥控器。比较灵活。</div>
+
+  <script src="./index.js"></script>
+</body>
+</html>

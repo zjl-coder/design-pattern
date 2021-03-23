@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>抽象工厂模式</h1>
+  <div>工厂模式的升级版。</div>
+  <div>在工厂模式中，工厂类直接生产柠檬苹果等水果实例。</div>
+  <div>在抽象工厂模式中，则将工厂类也抽象化（创建父类工厂，且改工厂不能被实例化）继承该工厂类的工厂A 或者工厂B也都具备生产柠檬苹果等实例（水果类的抽象类不属于抽象工厂模式中必须的）。</div>
+
+  <h4>工厂模式与抽象工厂模式</h4>
+  <ul>
+    <li>
+      我们在实际使用的时候不一定需要每个工厂都继承抽象工厂类，比如只有一个工厂的话我们可以直接使用工厂模式，在实战中灵活使用。
+    </li>
+    <li><strong>工厂模式</strong> 主要关注单独的产品实例的创建；</li>
+    <li><strong>抽象工厂模式</strong> 主要关注产品类簇实例的创建，如果产品类簇只有一个产品，那么这时的抽象工厂模式就退化为工厂模式了；（如果只有A品种的水果，则在一个工厂里生产，这个时候就不需要构建抽象工厂了）</li>
+  </ul>
+  <script src="./index.js"></script>
+</body>
+</html>

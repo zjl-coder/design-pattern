@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>享元模式</h1>
+  <div>
+    <strong>享元模式</strong> （Flyweight Pattern）运用共享技术来有效地支持大量细粒度 <strong>对象</strong> 的 <strong>复用</strong> ，以减少创建的对象的数量。
+    享元模式的主要思想是共享细粒度对象，也就是说如果系统中存在多个相同的对象，那么只需共享一份就可以了，不必每个都去实例化每一个对象，这样来精简内存资源，提升性能和效率。
+  </div>
+  <div>控制创建对象的数量，减少内存中对象的数量，降低内存，提高对象复用率</div>
+  <h4>生活案例</h4>
+  <div>驾校考试时，如果不启用享元模式，则有多少考生，就要提供多少车，启用享元模式时，则少数量车可供多个考生排队共用</div>
+  <h4>资源池概念</h4>
+  <div>模拟队列，资源池使用情况，先判断有没有空资源，有就直接使用，没有就等待有空闲的通知再使用</div>
+  <!-- <script src="./index.js"></script> -->
+  <script src="./index2.js"></script>
+</body>
+</html>

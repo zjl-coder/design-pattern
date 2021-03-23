@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>职责链模式</h1>
+  <h4>生活案例</h4>
+  <ul>
+    你需要请两天假。首先跟你的小组领导提了一句，小领导说不行呐我只能批半天假，建议找部门经理。于是你来到了部门经理办公室，部门经理说不行呐我只能批一天假，建议找总经理。来到总经理办公室，总经理勉为其难的说，好叭，不过要扣你四天工资。于是你请到了两天假。
+  </ul>
+  <h4>特点</h4>
+  <ul>
+    <li>请求在一系列对象中传递，形成一条链；</li>
+    <li>链中的请求接受者对请求进行分析，要么处理这个请求，要么把这个请求传递给链的下一个接受者；</li>
+  </ul>
+  <pre>
+    <code>
+      var askLeave = function(duration) {
+          if (duration <= 0.5) {
+              console.log('小组领导经过一番心理斗争：批准了')
+          } else if (duration <= 1) {
+              console.log('部门领导经过一番心理斗争：批准了')
+          } else if (duration <= 2) {
+              console.log('总经理经过一番心理斗争：批准了')
+          } else {
+              console.log('总经理：不准请这么长的假')
+          }
+      }
+      askLeave(0.5)   // 小组领导经过一番心理斗争：批准了
+      askLeave(1)     // 部门领导经过一番心理斗争：批准了
+      askLeave(2)     // 总经理经过一番心理斗争：批准了
+      askLeave(3)     // 总经理：不准请这么长的假
+    </code>
+  </pre>
+  <div>职责链模式可能在真实的业务代码中见的不多，但是作用域链、原型链、DOM 事件流的事件冒泡，都有职责链模式的影子</div>
+  <h4>职责链模式与组合模式</h4>
+  <ul>
+    职责链模式可以和组合模式一起使用，比如把职责节点通过组合模式来组合，从而形成组合起来的树状职责链。
+  </ul>
+  <h4>职责链模式与装饰模式</h4>
+  <ul>
+    <li>这两个模式都是在运行期间动态组合</li>
+    <li>装饰模式是动态组合装饰器，可以有任意多个对象来装饰功能，</li>
+    <li>而职责链是动态组合职责节点，有一个职责节点处理的话就结束。</li>
+    <li>另外他们的目的也不同，装饰模式为对象添加功能，而职责链模式是要实现发送者和接收者解耦。</li>
+  </ul>
+  <script src="./index.js"></script>
+</body>
+</html>

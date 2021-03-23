@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>装饰者模式</h1>
+  <div>装饰者模式又称为装饰器模式，为对象添加新功能；不改变其原有的结构和功能。</div>
+
+  <h4>适配器模式、装饰者模式与代理模式区别</h4>
+  <ul>
+    <li>三者都需要一个第三方构造函数（或类）来掩盖（屏蔽）目标类</li>
+    <li><strong>适配器模式</strong> 是将不兼容的接口转换成符合期望的格式而已，复用已存在的功能，不创建新功能（一般是原来的功能不能用了，或者不满足格式了，才需要适配器模式，这种情况下不会再去访问原目标对象）</li>
+    <li><strong>装饰器模式</strong> 是扩展功能，原有功能不变且可直接使用。</li>
+    <li><strong>代理模式</strong> 原有功能不变，但一般是经过限制访问的；而且一般不直接访问原有目标对象。</li>
+  </ul>
+  <h4>个人理解：</h4>
+  <ul>
+    <li>一般没有添加新功能，只是创建新的函数（与目标函数不同名）间接的调用目标，则属于适配器。装饰器则添加新的功能（有可能同名也有可能不同）。</li>
+    <li>适配器添加功能就变成了装饰器。</li>
+  </ul>
+  <h4>es7 装饰器</h4>
+  <ul>
+    <li><a href="https://es6.ruanyifeng.com/#docs/decorator">装饰器 阮一峰</a></li>
+    <li>es7 的装饰器 是将装饰器返回的新的对象赋值给跟目标对象同名的变量。</li>
+  </ul>
+  <pre>
+    <code>
+      @decorator
+      class A {}
+
+      // 等同于
+
+      class A {}
+      A = decorator(A) || A; // 赋值给要装饰的对象的同名变量，此时的A 与 装饰前的A已经不是同一个对象了
+    </code>
+  </pre>
+
+  <div>
+    <a href="https://es6.ruanyifeng.com/#docs/decorator">装饰器 阮一峰</a> ：
+    core-decorators.js是一个第三方模块，提供了几个常见的装饰器，通过它可以更好地理解装饰器。 很有用。
+  </div>
+  <br />
+  <div>Mixin （混入行为，一般也属于装饰器行为）可以使用 extend (继承) 代替混入行为</div>
+  <div>Trait 也是一种装饰器，效果与 Mixin 类似。</div>
+  <script src="./index.js"></script>
+</body>
+</html>

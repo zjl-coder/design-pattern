@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>工厂模式</h1>
+    <div>告诉工厂类（工厂函数）要什么，就给你返回什么对象</div>
+    <div>例如：有一个生产水果的工厂会生产 '柠檬'，'苹果'</div>
+    <h4>特点：</h4>
+    <ul>
+      <li>工厂类（工厂函数）里面有一个成员方法专门来反馈想要的水果品类 creatFruits()</li>
+      <li>工厂实例根据输入的不同返回不同产品类的实例，一般用来创建同一类对象</li>
+    </ul>
+    <h4>适用场景</h4>
+    <ul>
+      <li>
+        如果你不想让某个子系统与较大的那个对象之间形成强耦合，而是想运行时从许多子系统中进行挑选的话，那么工厂模式是一个理想的选择
+      </li>
+      <li><strong style="color: brown;">将new操作简单封装，遇到new的时候就应该考虑是否用工厂模式；</strong></li>
+      <li>
+        需要依赖具体环境创建不同实例，这些实例都有相同的行为,这时候我们可以使用工厂模式，简化实现的过程，同时也可以减少每种对象所需的代码量，有利于消除对象间的耦合，提供更大的灵活性
+      </li>
+    </ul>
+    <h4>场景例子</h4>
+    <ul>
+      <li>
+        JQuery的$()就是一个工厂函数，它根据传入参数的不同创建元素或者去寻找上下文中的元素，创建成相应的jQuery对象
+      </li>
+      <li>vue 的异步组件</li>
+    </ul>
+    <!-- 帮助理解的最简单的工厂方法 -->
+    <script src="./index.js"></script>
+    <!-- <script src="./index-2.js"></script> 优化后的工厂方法 -->
+  </body>
+</html>

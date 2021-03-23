@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>访问者模式</h1>
+  <div><strong>访问者模式</strong> 是将对 <strong>数据的操作</strong> 和 <strong>数据结构</strong> 进行分离，将对数据中各元素的操作封装成独立的类，使其在不改变数据结构的前提下可以拓展对数据新的操作。</div>
+  <h4>现实场景</h4>
+  <ul>
+    例如做项目，需求文档，
+    <li>项目经理访问需求文档的是想了解项目边界，</li>
+    <li>开发人员访问需求文档的是想知道有哪些功能需要开发、难点与重点</li>
+    <li>不同的立场返回项目的信息会不同，但是需求文档结构还是那个需求文档。</li>
+    <li>不同的人有不同的能力，对数据的操作不同。项目经理，开发人员对需求稿只有读的能力，并且读出来的信息不同，设计人员对设计稿除了读取能力，还有修改能力。</li>
+  </ul>
+  <h4>理解</h4>
+  <ul>
+    <li>现实中的应用，似乎跟权限管理有些类似</li>
+    <li>不同的人得到的反馈信息不同，但是反馈的数据结构都是一样的（如都是Object 对象）</li>
+  </ul>
+  <script src="./index.js"></script>
+</body>
+</html>

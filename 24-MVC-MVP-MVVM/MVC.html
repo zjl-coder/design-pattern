@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>MVC 模式</h1>
+  <div><strong>MVC 不是一种技术，而是一种理念。</strong></div>
+  <div>MVC 模式 极简实现</div>
+  <pre>
+    <code>
+      /** 模拟 Model, View, Controller */
+      var M = {}, V = {}, C = {};
+
+      /** Model 负责存放资料 */
+      M.data = "hello world";
+
+      /** View 负责将资料输出给用户 */
+      V.render = (M) => { alert(M.data); }
+
+      /** Controller 作为连接 M 和 V 的桥梁 */
+      C.handleOnload = () => { V.render(M); }
+
+      /** 在网页读取的时候呼叫 Controller */
+      window.onload = C.handleOnload;
+    </code>
+  </pre>
+
+  <h4>MVC之间的互动</h4>
+  <ul>
+    <li><strong>模型（Model）</strong> 用于封装与应用程序的业务逻辑相关的数据以及对数据的处理方法。“ Model ”有 <strong>对数据直接访问</strong> 的权力，例如对数据库的访问。“Model”不依赖“View”和“Controller”，也就是说，<strong>Model 不关心它会被如何显示或是如何被操作</strong> 。但是 Model 中数据的变化一般会通过一种刷新机制被公布。为了实现这种机制，那些用于监视此 Model 的 View 必须事先在此 Model 上注册，从而，View 可以了解在数据 Model 上发生的改变。（比如：观察者模式（软件设计模式））</li>
+    <li><strong>视图（View）</strong> 能够实现 <strong>数据有目的的显示</strong> （理论上，这不是必需的）。在 View 中一般没有程序上的逻辑。为了实现 View 上的刷新功能，View 需要访问它监视的数据模型（Model），因此应该事先在被它监视的数据那里注册。</li>
+    <li><strong>控制器（Controller）</strong> 起到不同层面间的组织作用，用于控制应用程序的流程。它 <strong>处理事件并作出响应</strong> 。“事件”包括用户的行为和数据 Model 上的改变。</li>
+  </ul>
+
+  <h4>发展史 (有助于更好的理解MVC三者之间的各自分工)</h4>
+  <ul>
+    <li>在最初的JSP网页中，像数据库查询语句(SQL query)这样的数据层代码和像HTML这样的表示层代码是混在一起。</li>
+    <li>当pc端和移动端都要显示同样的数据（以不同的位置显示）时，需要写重复写SQL query。</li>
+    <li>有着经验比较丰富的开发者会将数据从表示层分离开来，但这样的良好设计通常并不是很容易做到的，实现它需要精心地计划和不断的尝试。</li>
+    <li>MVC可以从根本上强制性地将它们分开。尽管构造MVC应用程序需要一些额外的工作，但是它带给我们的好处是毋庸置疑的。</li>
+    <li>首先，多个 View 能共享一个 Model 。</li>
+    <li>如今，同一个Web应用程序会提供多种用户界面，例如用户希望既能够通过浏览器来收发电子邮件，还希望通过手机来访问电子邮箱，这就要求Web网站同时能提供Internet界面和WAP界面。</li>
+    <li>在MVC设计模式中， Model 响应用户请求并返回响应数据，View 负责格式化数据并把它们呈现给用户，业务逻辑和表示层分离，同一个 Model 可以被不同的 View 重用，所以大大提高了代码的可重用性。</li>
+    <li>Controller 是自包含（self-contained,指高独立内聚）的对象，与 Model 和 View 保持相对独立，所以可以方便的改变应用程序的数据层和业务规则。例如，把数据库从MySQL移植到Oracle，或者把RDBMS数据源改变成LDAP数据源，只需改变 Model 即可。一旦正确地实现了控制器，不管数据来自数据库还是LDAP服务器，View 都会正确地显示它们。</li>
+    <li>由于 <strong>MVC模式的三个模块相互独立，改变其中一个不会影响其他两个</strong> ，所以依据这种设计思想能构造良好的少互扰性的构件。</li>
+    <li>此外，Controller 提高了应用程序的灵活性和可配置性。</li>
+    <li>Controller 可以用来连接不同的 Model 和 View 去完成用户的需求，也可以构造应用程序提供强有力的手段。</li>
+    <li><strong>给定一些可重用的 Model 、 View 和Controller 可以根据用户的需求选择适当的 Model 进行处理，然后选择适当的的 View 将处理结果显示给用户。</strong></li>
+  </ul>
+  <img src="../public/mvc.jpeg" alt="" srcset="" />
+  <br />
+  <img src="../public/mvc2.png" alt="" srcset="" style="max-width: 60%;" />
+  <div>图片补充说明</div>
+  <ul>
+    <li>MVC 的实现一般要借助 发布--订阅者模式（或者 观察者模式）</li>
+    <li>model 接管数据源</li>
+    <li>model 里的每个行为（curd）都注册为发布者，有行为发生时，通知视图（视图是model的订阅者，订阅的操作在view类完成）</li>
+    <li>view 获取来自model的数据（view 类初始化时传入model对象，操作model的curd）</li>
+    <li>view 注册成为model的订阅者（model的curd每个变化，都要通知到view更新界面, 所以每个model的动作都要订阅）</li>
+    <li>view 注册注册成为发布者，有view事件发生的时候（如 click 或者 select change）通知controller (controller 是 view的订阅者，订阅操作在controller类完成)</li>
+    <li>controller 注册成为view的每个dom事件的订阅者(View 的 Click 事件触发绑定的回调函数，回调函数里通知 controller 订阅者)，当有涉及到数据操作时，调用model对象进行操作（需要在初始化时传入 view 和 model 对象）</li>
+    <li>Model 只专注管理数据，View 只专注（从Model获取数据）如何显示（组织）HTML，剩下的行为都在 Controller 里面</li>
+  </ul>
+  <h4>MVC 实战案例</h4>
+  
+  <select id="list" size="10" style="width: 10rem"></select><br/>
+  <button id="plusBtn">  +  </button>
+  <button id="minusBtn">  -  </button>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+  <script src="./MVC.js"></script>
+  <script>
+    const list = $('#list');
+    const addButton = $('#plusBtn');
+
+    // 初始化模块，连接数据库['PHP', 'JS']（这个数据模拟数据库数据）
+    const model = new Model(['PHP', 'JS']);
+    // 初始化视图
+    const view = new View(model,{ list, addButton});
+    // 初始化控制器
+    new Controller(model, view);
+    view.show();
+  </script>
+</body>
+</html>

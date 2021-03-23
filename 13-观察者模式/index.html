@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>观察者模式</h1>
+  <div>在众多设计模式中，可能 <strong>最常见</strong> 、<strong>最有名</strong> 的就是发布 - 订阅模式了，本篇我们一起来学习这个模式。</div>
+  <div><strong>发布 - 订阅模式</strong> （Publish-Subscribe Pattern, pub-sub）又叫 <strong>观察者模式</strong>（Observer Pattern），它定义了一种 <strong>一对多</strong> 的关系，让多个订阅者对象同时监听某一个发布者，或者叫主题对象，这个主题对象的状态发生变化时就会通知所有订阅自己的订阅者对象，使得它们能够自动更新自己。</div>
+  <h4>生活中的例子</h4>
+  <ul>
+    <li>群聊天：当你加入一个群的时候，就是在这个群留下了一个联系方式，当有人发言时，就发给'群'这个对象，群收到某个人的通知，再找到别人留在它那里的联系方式逐个通知，而我们留下的这个联系方式就是某个接收信息的方法</li>
+    <li>去买鞋：鞋店售罄，你留下电话号码，当有货时，店员就是逐个按照一定的排序方式打电话通知顾客有货了。</li>
+  </ul>
+  <h4>实战中的发布--订阅模式</h4>
+  <ul>
+    <li>
+      jQuery 可以通过其自带的 API 比如 on、trigger、off 来轻松实现事件的订阅、发布、取消订阅等操作
+      <pre>
+        <code>
+          function eventHandler() {
+            console.log('自定义方法')
+          }
+          /* ---- 事件订阅 ---- */
+          $('#app').on('myevent', eventHandler)
+          // 发布
+          $('#app').trigger('myevent')
+          // 输出：自定义方法
+          /* ---- 取消订阅 ---- */
+          $('#app').off('myevent')
+          $('#app').trigger('myevent')
+          // 没有输出
+        </code>
+      </pre>
+    </li>
+    <li>
+      原生JavaScript addEventListener、dispatchEvent、removeEventListener
+      <pre>
+        <code>
+          // 输出：自定义方法
+          function eventHandler(dom) {
+            console.log('自定义方法', dom)
+          }
+          var app = document.getElementById('app')
+          /* ---- 事件订阅 ---- */
+          app.addEventListener('myevent', eventHandler)
+          // 发布
+          app.dispatchEvent(new Event('myevent'))
+          // 输出：自定义方法+DOM
+          /* ---- 取消订阅 ---- */
+          app.removeEventListener('myevent', eventHandler)
+          app.dispatchEvent(new Event('myevent'))
+          // 没有输出
+        </code>
+      </pre>
+    </li>
+    <li>
+      使用 Vue 的 EventBus
+      <ul>
+        Vue 也是实现有一套事件机制，其中一个我们熟知的用法是 EventBus。在多层组件的事件处理中，如果你觉得一层层 $on、$emit 比较麻烦，而你又不愿意引入 Vuex，那么这时候推介使用 EventBus 来解决组件间的数据通信
+        <pre>
+          <code>
+            // event-bus.js
+            import Vue from 'vue'
+            export const EventBus = new Vue()
+          </code>
+        </pre>
+        <pre>
+          <code>
+            // component-a.js 组件A 注册监听事件（订阅事件）
+            import { EventBus } from "./event-bus.js";
+            EventBus.$on("myevent", args => {
+                console.log(args)
+            })
+          </code>
+        </pre>
+
+        <pre>
+          <code>
+            // component-b.js 组件B 发布事件
+            import { EventBus } from "./event-bus.js";
+            EventBus.$emit("myevent", 'some args')
+          </code>
+        </pre>
+      </ul>
+    </li>
+  </ul>
+  <h4>使用场景</h4>
+  <ul>
+    发布 - 订阅模式的使用场景一般是：当一个对象的改变需要同时改变其它对象，并且它不知道具体有多少对象需要改变。发布 - 订阅模式还可以帮助实现一些其他的模式，比如 <strong>中介者模式</strong> 。
+  </ul>
+  <h4>发布 - 订阅模式和观察者模式</h4>
+  <ul>
+    观察者模式与发布 - 订阅者模式，在平时你可以认为他们是一个东西，但是某些场合（比如面试）下可能需要稍加注意，借用网上一张流行的图：
+    <div>
+      <img src="../public/发布订阅-观察者.jpeg" alt="" srcset="">
+    </div>
+    区别主要在发布 - 订阅模式中间的这个 Event Channel：
+    <li><strong>观察者模式</strong> 中的观察者和被观察者之间还存在耦合，被观察者还是知道观察者的 (发消息者知道要固定通知谁（观察者），没有留下信息的地方，被通知者写死在发布者里面)</li>
+    <li><strong>发布 - 订阅模式</strong> 中的发布者和订阅者不需要知道对方的存在，他们通过 <strong>消息代理</strong> 来进行通信，解耦更加彻底；（发消息这不需要知道通知谁，它只需要通知小本本上的所有人（订阅者），管他们是谁，只要留下信息的都通知）</li>
+  </ul>
+  <h4>发布 - 订阅模式和责任链模式</h4>
+  <ul>
+    发布 - 订阅模式和责任链模式也有点类似，主要区别在于：
+    <li><strong>发布 - 订阅模式</strong> 传播的消息是根据需要随时发生变化，是发布者和订阅者之间约定的结构，在多级发布 - 订阅的场景下，消息可能完全不一样；</li>
+    <li><strong>责任链模式</strong> 传播的消息是不变化的，即使变化也是在原来的消息上稍加修正，不会大幅改变结构；</li>
+  </ul>
+  <script src="./index.js"></script>
+</body>
+</html>

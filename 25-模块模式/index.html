@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>模块模式</h1>
+  <h4>命名空间模式</h4>
+  <ul>
+    命名空间模式是一个简单的模拟模块的方法，即创建一个全局对象，然后将变量和方法添加到这个全局对象中，这个全局对象是作为命名空间一样的角色。
+    <pre>
+      <code>
+        var MYNS = {}
+        MYNS.param1 = 'hello'
+        MYNS.method1 = function() {
+            //...
+        }
+      </code>
+    </pre>
+  </ul>
+  <h4>模块模式</h4>
+  <ul>
+    使用闭包的特性来模拟实现私有成员的功能来提升安全性, 将要隐藏的变量和方法放在闭包中，这就是模块模式。
+    <pre>
+      <code>
+        var myModule = (function() {
+            var privateProp = ''      	// 私有变量
+            var privateMethod = function() { // 私有方法
+                console.log(privateProp)
+            }
+            
+            return {
+                publicProp: 'foo',              // 公有变量
+                publicMethod: function(prop) {  // 共有方法
+                    privateProp = prop
+                    privateMethod()
+                }
+            }
+        })()
+        myModule.publicMethod('new prop') // 输出：new prop
+        myModule.privateProp              // Uncaught TypeError: myModule.privateMethod is not a function
+        myModule.privateProp              // undefined
+      </code>
+    </pre>
+    这里的 <strong>私有变量</strong> 和 <strong>私有方法</strong> ，在闭包外面无法访问到，称为私有成员。而闭包返回的方法因为作用域的原因可以访问到私有成员，所以称为 <strong>特权方法</strong> 。
+  </ul>
+  <h4>揭示模块模式</h4>
+  <ul>
+    在上面的 <strong>模块模式</strong> 例子上稍加改动，可以得到 <strong>揭示模块模式</strong> （Reveal Module Pattern），又叫 <strong>暴露模块模式</strong> ，在私有域中定义我们所有的函数和变量，并且返回一个匿名对象，把想要暴露出来的私有成员赋值给这个对象，使这些 <strong>私有成员公开化</strong> 。
+    <pre>
+      <code>
+        var myModule = (function() {
+            var privateProp = ''
+            var printProp = function() {
+                console.log(privateProp)
+            }
+            
+            function setProp(prop) {
+                privateProp = prop
+                printProp()
+            }
+            
+            return {
+                print: printProp,
+                set: setProp
+            }
+        })()
+        myModule.set('new prop')          // 输出：new prop
+        myModule.setProp()                // Uncaught TypeError: myModule.setProp is not a function
+        myModule.privateProp              // undefined
+      </code>
+    </pre>
+    揭示模块暴露出来的私有成员可以在被重命名后公开访问，也增强了可读性。
+  </ul>
+  <h4>ES6 module</h4>
+  <ul>
+    export、import
+  </ul>
+  <a href="https://segmentfault.com/a/1190000022599809">CommonJS、AMD、CMD、ES6 模块规范讲解</a>
+</body>
+</html>

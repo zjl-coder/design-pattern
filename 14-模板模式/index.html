@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>模板方法模式</h1>
+  <div><strong>模板方法模式</strong>（Template Method Pattern）父类中定义一组操作算法骨架，而将一些实现步骤延迟到子类中，使得子类可以不改变父类的算法结构的同时，重新定义算法中的某些实现步骤。模板方法模式的关键是 <strong>算法步骤的骨架和具体实现分离</strong> 。</div>
+
+  <h4><a href="https://www.yuque.com/wubinhp/uxiv5i/kouxax">模板方法模式·语雀</a></h4>
+
+  <h4>优缺点</h4>
+  <ul>
+    <li><strong>封装了不变部分，扩展可变部分,</strong> 把算法中不变的部分封装到父类中直接实现，而可变的部分由子类继承后再具体实现;</li>
+    <li><strong>提取了公共代码部分，易于维护，</strong> 因为公共的方法被提取到了父类，那么如果我们需要修改算法中不变的步骤时，不需要到每一个子类中去修改，只要改一下对应父类即可；</li>
+    <li><strong>行为被父类的模板方法固定，</strong> 子类实例只负责执行模板方法，具备可扩展性，符合开闭原则；</li>
+    <strong>缺点</strong> ：增加了系统复杂度，主要是增加了的抽象类和类间联系，需要做好文档工作；
+  </ul>
+  <h4>模板方法模式与工厂模式</h4>
+  <ul>
+    <li>模板方法模式的实现可以使用工厂模式来获取所需的对象。</li>
+    <li>
+      另外，模板方法模式和抽象工厂模式比较类似，都是使用抽象类来提取公共部分，不一样的是：
+      <ul>
+        <li><strong>抽象工厂模式</strong> 提取的是实例的功能结构；</li>
+        <li><strong>模板方法模式</strong> 提取的是算法的骨架结构；</li>
+      </ul>
+    </li>
+  </ul>
+  <div>我的理解：抽象工厂是提供公共的能力，但是子类不一定行为都一样，可以用某个方法，也可以不用，而模板模式是抽象工厂的进一步约束，子类需要相同的行为产生不同的结果，并且这个行为一般在父类已经实现好。</div>
+  <script src="./index.js"></script>
+</body>
+</html>

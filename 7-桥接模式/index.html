@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>桥接模式</h1>
+  <div>桥接模式（Bridge Pattern）又称桥梁模式，将抽象部分与它的实现部分分离，使它们都可以独立地变化。使用组合关系代替继承关系，降低抽象和实现两个可变维度的耦合度。</div>
+  <div>
+    例如
+    <ul>
+      <li>洗衣机：将电机，滚筒，和变频器抽象出来独立成类，然后创建一个洗衣机类引用这些部件类组合成新的类</li>
+      <li>公文包：将颜色和包类型独立成类，然后创建一个包类引用这些组件组合成一个新的类</li>
+    </ul>
+  </div>
+  <h4>桥接模式与建造者模式的区别</h4>
+  <ul>
+    <li><strong>桥接模式</strong> 是使用现有类组件组合成一个新的产品类，不继承，也不需要一步一步进行设计对象属性就可以创建新对象。</li>
+    <li><strong>建造者模式</strong> 也是组合现有的类组件，但是需要通过一步一步的指挥设置创建新产品对象。</li>
+    <li><strong>主要区别</strong>： 建造者组合现有类，一步一步指挥创建新产品对象。而桥接模式是通过组合现有类创建新产品对象</li>
+  </ul>
+  <h4>桥接模式与抽象工厂模式的配合</h4>
+  <ul>
+    这两个模式可以组合使用，比如部件类实例的创建可以结合抽象工厂模式，因为部件类实例也属于一个产品类簇，明显属于抽象工厂模式的适用范围，如果创建的部件类不多，或者比较简单，也可以使用简单工厂模式
+  </ul>
+  <script src="./index.js"></script>
+</body>
+</html>

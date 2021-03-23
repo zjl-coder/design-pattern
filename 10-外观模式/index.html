@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>外观模式</h1>
+  <div><strong>外观模式</strong> （Facade Pattern）又叫 <strong>门面模式</strong> ，定义一个将子系统的一组接口集成在一起的高层接口，以提供一个一致的外观。外观模式让外界减少与子系统内多个模块的直接交互，从而减少耦合，让外界可以更轻松地使用子系统。本质是 <strong>封装交互，简化调用</strong> 。</div>
+  <br/>
+  <div><strong>使用非常频繁</strong></div>
+  <h4>注意</h4>
+  <ul>
+    <strong>外观模式</strong> 一般是作为子系统的功能出口出现，使用的时候可以在其中增加新的功能，但是不推介这样做，因为外观应该是对已有功能的包装，不应在其中掺杂新的功能。
+  </ul>
+  <h4>实战中的外观模式</h4>
+  <ul>
+    <li>
+      函数参数重载
+      <ul>
+        比如某个函数有多个参数，其中一个参数可以传递也可以不传递，你当然可以直接弄两个接口，但是使用函数参数重载的方式，可以让使用者获得更大的自由度，让两个使用上基本类似的方法获得统一的外观。
+        <pre>
+          <code>
+            function domBindEvent(nodes, type, selector, fn) {
+                if (fn === undefined) {
+                    fn = selector
+                    selector = null
+                }
+                // ... 剩下相关逻辑
+            }
+            domBindEvent(nodes, 'click', '#div1', fn)
+            domBindEvent(nodes, 'click', fn)
+          </code>
+        </pre>
+      </ul>
+    </li>
+    <li>抹平浏览器兼容性问题</li>
+  </ul>
+  <h4>源码中的外观模式</h4>
+  <ul>
+    <li>Vue 源码中的函数参数重载  createElement</li>
+    <li>Lodash 源码中的函数参数重载 range</li>
+    <li>jQuery 源码中的函数参数重载 on、off、bind、one、load、ajaxPrefilter</li>
+    <li>jQuery 源码中的外观模式, 当我们使用 jQuery 的 $(document).ready(...) 来给浏览器加载事件添加回调时，jQuery 会使用源码中的 bindReady 方法</li>
+    <li>Axios 源码中的外观模式</li>
+  </ul>
+  <h4>外观模式与中介者模式</h4>
+  <ul>
+    <li><strong>外观模式:</strong> 封装子使用者对子系统内模块的直接交互，方便使用者对子系统的调用；</li>
+    <li><strong>中介者模式：</strong> 封装子系统间各模块之间的直接交互，松散模块间的耦合；</li>
+  </ul>
+  <h4>外观模式与单例模式</h4>
+  <ul>
+    有时候一个系统只需要一个外观，比如之前举的 Axios 的 HTTP 模块例子。这时我们可以将外观模式和单例模式可以一起使用，把外观实现为单例。
+  </ul>
+</body>
+</html>
