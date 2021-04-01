@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="https://my-cdns.github.io/cdn/assets/prism.css" />
+    <script src="https://my-cdns.github.io/cdn/assets/prism.js"></script>
   </head>
   <body>
     <h1>原型模式</h1>
@@ -17,29 +19,29 @@
       <li>es5: 声明一个构造函数</li>
     </ul>
     <pre>
-    <code>
-      // es6 
-      class Person {
-        constructor(name) {
-          this.name = name
+      <code class="language-javascript">
+        // es6 
+        class Person {
+          constructor(name) {
+            this.name = name
+          }
+          getName() {
+            return this.name
+          }
         }
-        getName() {
-          return this.name
+        class Student extends Person {
+          constructor(name) {
+            super(name)
+          }
+          sayHello() {
+            console.log(`Hello， My name is ${this.name}`)
+          }
         }
-      }
-      class Student extends Person {
-        constructor(name) {
-          super(name)
-        }
-        sayHello() {
-          console.log(`Hello， My name is ${this.name}`)
-        }
-      }
-      
-      let student = new Student("xiaoming")
-      student.sayHello()      
-    </code>
-  </pre>
+        
+        let student = new Student("xiaoming")
+        student.sayHello()      
+      </code>
+    </pre>
   <div>原型模式，就是创建一个共享的原型，通过拷贝这个原型来创建新的类，用于创建重复的对象，带来性能上的提升。</div>
   </body>
 </html>

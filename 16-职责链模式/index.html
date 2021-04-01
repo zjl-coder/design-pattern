@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://my-cdns.github.io/cdn/assets/prism.css" />
+  <script src="https://my-cdns.github.io/cdn/assets/prism.js"></script>
 </head>
 <body>
   <h1>职责链模式</h1>
@@ -18,7 +20,7 @@
     <li>链中的请求接受者对请求进行分析，要么处理这个请求，要么把这个请求传递给链的下一个接受者；</li>
   </ul>
   <pre>
-    <code>
+    <code class="language-javascript">
       var askLeave = function(duration) {
           if (duration <= 0.5) {
               console.log('小组领导经过一番心理斗争：批准了')

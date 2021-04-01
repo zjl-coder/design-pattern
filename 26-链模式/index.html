@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://my-cdns.github.io/cdn/assets/prism.css" />
+  <script src="https://my-cdns.github.io/cdn/assets/prism.js"></script>
 </head>
 <body>
   <h1>链模式</h1>
@@ -17,7 +19,7 @@
   </ul>
   <h4>案例</h4>
   <pre>
-    <code>
+    <code class="language-javascript">
       /* 四边形 */
       var rectangle = {
           length: null,  // 长
@@ -60,7 +62,7 @@
     不一定在方法中 return this，也可以返回 <strong>其他对象</strong> ，这样后面的方法可以对这个新对象进行其他操作。比如在 Promise 的实现中，每次 then 方法返回的就不是 this，而是一个新的 Promise，只不过其外观一样，所以我们可以不断 then 下去。后面的每一个 then 都不是从最初的 Promise 实例点出来的，而是从前一个 then 返回的新的 Promise 实例点出来的。
   </ul>
   <pre>
-    <code>
+    <code class="language-javascript">
       const prom1 = new Promise((resolve, reject) => {
           setTimeout(() => {
               console.log('Promise 1 resolved')
@@ -77,7 +79,7 @@
   <ul>
     事实上，某些原生的方法就可以使用链模式，以数组操作为例，比如我们想查看一个数组中奇数的平方和：
     <pre>
-      <code>
+      <code class="language-javascript">
         [1, 2, 3, 4, 5, 6]
         .filter(num => num % 2)
         .map(num => num * num)

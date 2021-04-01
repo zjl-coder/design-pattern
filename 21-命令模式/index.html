@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://my-cdns.github.io/cdn/assets/prism.css" />
+  <script src="https://my-cdns.github.io/cdn/assets/prism.js"></script>
 </head>
 <body>
   <h1>命令模式</h1>
@@ -24,7 +26,7 @@
 
   <div>我们原来分装电灯类是这样子的</div>
   <pre>
-    <code>
+    <code class="language-javascript">
       // 电灯类
       class Light{
         constructor(name){
@@ -55,7 +57,7 @@
   </pre>
   <div>将灯的控制行为抽离出来，独立成了类，形成发送命令类</div>
   <pre>
-    <code>
+    <code class="language-javascript">
       // 电灯类
       class Light{
         constructor(name){

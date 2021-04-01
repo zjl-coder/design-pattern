@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://my-cdns.github.io/cdn/assets/prism.css" />
+  <script src="https://my-cdns.github.io/cdn/assets/prism.js"></script>
 </head>
 <body>
   <h1>模块模式</h1>
@@ -51,7 +53,7 @@
   <ul>
     在上面的 <strong>模块模式</strong> 例子上稍加改动，可以得到 <strong>揭示模块模式</strong> （Reveal Module Pattern），又叫 <strong>暴露模块模式</strong> ，在私有域中定义我们所有的函数和变量，并且返回一个匿名对象，把想要暴露出来的私有成员赋值给这个对象，使这些 <strong>私有成员公开化</strong> 。
     <pre>
-      <code>
+      <code class="language-javascript">
         var myModule = (function() {
             var privateProp = ''
             var printProp = function() {

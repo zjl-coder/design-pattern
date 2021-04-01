@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://my-cdns.github.io/cdn/assets/prism.css" />
+  <script src="https://my-cdns.github.io/cdn/assets/prism.js"></script>
 </head>
 <body>
   <h1>观察者模式</h1>
@@ -20,7 +22,7 @@
     <li>
       jQuery 可以通过其自带的 API 比如 on、trigger、off 来轻松实现事件的订阅、发布、取消订阅等操作
       <pre>
-        <code>
+        <code class="language-javascript">
           function eventHandler() {
             console.log('自定义方法')
           }
@@ -39,7 +41,7 @@
     <li>
       原生JavaScript addEventListener、dispatchEvent、removeEventListener
       <pre>
-        <code>
+        <code class="language-javascript">
           // 输出：自定义方法
           function eventHandler(dom) {
             console.log('自定义方法', dom)
@@ -62,14 +64,14 @@
       <ul>
         Vue 也是实现有一套事件机制，其中一个我们熟知的用法是 EventBus。在多层组件的事件处理中，如果你觉得一层层 $on、$emit 比较麻烦，而你又不愿意引入 Vuex，那么这时候推介使用 EventBus 来解决组件间的数据通信
         <pre>
-          <code>
+          <code class="language-javascript">
             // event-bus.js
             import Vue from 'vue'
             export const EventBus = new Vue()
           </code>
         </pre>
         <pre>
-          <code>
+          <code class="language-javascript">
             // component-a.js 组件A 注册监听事件（订阅事件）
             import { EventBus } from "./event-bus.js";
             EventBus.$on("myevent", args => {
@@ -79,7 +81,7 @@
         </pre>
 
         <pre>
-          <code>
+          <code class="language-javascript">
             // component-b.js 组件B 发布事件
             import { EventBus } from "./event-bus.js";
             EventBus.$emit("myevent", 'some args')

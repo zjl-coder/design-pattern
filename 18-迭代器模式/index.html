@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://my-cdns.github.io/cdn/assets/prism.css" />
+  <script src="https://my-cdns.github.io/cdn/assets/prism.js"></script>
 </head>
 <body>
   <h1>迭代器模式</h1>
@@ -13,7 +15,7 @@
 
   <h4>迭代器的简单实现</h4>
   <pre>
-    <code>
+    <code class="language-javascript">
       var forEach = function(arr, cb) {
           for (var i = 0; i < arr.length; i++) {
               cb.call(arr[i], arr[i], i, arr)
@@ -29,7 +31,7 @@ for-of 循环可以使用的范围包括 Array、Set、Map 结构、上文提到
       我们可以给一个对象设置一个迭代器，让一个对象也可以使用 for-of 循环：
     </div>
     <pre>
-      <code>
+      <code class="language-javascript">
         var bar = {
             a: 1,
             [Symbol.iterator]: function() {
