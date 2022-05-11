@@ -15,6 +15,7 @@ class Event {
   notify(obj) {
     const length = this._listeners.length;
     for (let i = 0; i < length; i++) {
+      // 在进行通知时，第一个参数默认传 发布者对象，第二个参数传 发布者广播的数据
       this._listeners[i](this._publisher, obj);
     }
   }
@@ -86,8 +87,11 @@ class View {
     // 将this保存下来，在window elements 元素 或者 model对象 执行函数调用本类成员时可以使用
     var that = this;
 
-    // 订阅model的新增数据的消息
-    this._model.itemAdd.attach(function () {
+    // 订阅model的新增数据的消息，更新界面
+    this._model.itemAdd.attach(function (model, data) {
+      // obj: 发布订阅器里定义的，在进行通知时，第一个参数传 发布者对象
+      // data:  modle 执行 addItem 方法时的通知参数 { elem: data }，在这里并没有运用起来。
+      console.log('model: model 对象，data: { elem: data }',model, data);
       // 因为这个函数是在model里面被调用执行的，所以这个函数里面的this指向的是model
       // 使用that 代替this
       that.rebuildList();
@@ -143,7 +147,7 @@ class Controller {
     this._view = view;
     const that = this;
 
-    // 注册成为 View的订阅者
+    // 注册成为 View的订阅者，接收view 按钮事件发起的通知，操作model 修改数据
     this._view.listModified.attach(function (sender, args) {
       console.log('controller list',sender, args);
       that.updateSelected(args.index);
