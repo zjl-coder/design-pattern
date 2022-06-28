@@ -145,6 +145,7 @@ class Controller {
     console.log('controller 初始化')
   }
 
+  // 这里使用了观察者模式，对已知的view进行通知更新，如果有n个view，控制器并不知道有哪些view需要更新，则需要将控制器注册为发布者，view 进行订阅，控制器获取model数据之后进行广播，即演变成双向绑定, MVVM 模式， V VM 即是发布者也是订阅者，两者互相订阅，各自广播，VM 操作 Model数据
   showView(){
     // 获取model的所有数据
     const items = this._model.getItems();
